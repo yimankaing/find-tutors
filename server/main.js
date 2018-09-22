@@ -7,6 +7,8 @@ import "../imports/startup/server";
 
 
 //methods
+import {USER} from '../imports/ui/rest-api/users/methods'
+
 import {STUDENT} from '../imports/ui/rest-api/students/methods'
 import {TEACHER} from '../imports/ui/rest-api/teachers/methods'
 import {SUBJECT} from '../imports/ui/rest-api/subjects/methods'
@@ -28,6 +30,24 @@ Meteor.startup(() => {
     "Access-Control-Allow-Headers":
       "Content-Type, Authorization, X-Requested-With"
   });
+
+  /*creating user*/
+  // USER.insertUser({
+  //   username: 'yiman',
+  //   password: '123456',
+  //   email: 'yimankaing@gmail.com',
+  //   profile:{
+  //     type: 'teacher'
+  //   },
+  // });
+  // USER.insertUser({
+  //   username: 'ratanak',
+  //   password: '123456',
+  //   email: 'ratanak@gmail.com',
+  //   profile:{
+  //     type: 'student'
+  //   },
+  // });
 
   // for (let i = 1; i <= 3; i++) {
   //   if (STUDENT.findStudent().length === 0) {

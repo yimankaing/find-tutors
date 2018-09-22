@@ -1,4 +1,4 @@
-import { COMMENT } from "./methods";
+import {COMMENT} from "./methods";
 
 /*
 403: forbidden
@@ -8,11 +8,7 @@ import { COMMENT } from "./methods";
 304: not modified
 */
 
-JsonRoutes.add("get", "/find_comment/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/find_comment/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
@@ -24,11 +20,7 @@ JsonRoutes.add("get", "/find_comment/:selector/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/findOne_comment/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/findOne_comment/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
@@ -40,7 +32,7 @@ JsonRoutes.add("get", "/findOne_comment/:selector/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/insert_comment/:doc", function(req, res, next) {
+JsonRoutes.add("get", "/insert_comment/:doc", function (req, res, next) {
   res.charset = "utf-8";
   const doc = req.params.doc ? JSON.parse(req.params.doc) : {};
 
@@ -60,11 +52,7 @@ JsonRoutes.add("get", "/insert_comment/:doc", function(req, res, next) {
   });
 });
 
-JsonRoutes.add("get", "/update_comment/:selector/:modifier/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/update_comment/:selector/:modifier/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const modifier = req.params.modifier ? JSON.parse(req.params.modifier) : {};
@@ -85,7 +73,7 @@ JsonRoutes.add("get", "/update_comment/:selector/:modifier/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/remove_comment/:selector", function(req, res, next) {
+JsonRoutes.add("get", "/remove_comment/:selector", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
 

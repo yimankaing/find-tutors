@@ -1,4 +1,4 @@
-import { POST } from "./methods";
+import {POST} from "./methods";
 
 /*
 403: forbidden
@@ -8,11 +8,7 @@ import { POST } from "./methods";
 304: not modified
 */
 
-JsonRoutes.add("get", "/find_post/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/find_post/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
@@ -24,11 +20,7 @@ JsonRoutes.add("get", "/find_post/:selector/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/findOne_post/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/findOne_post/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
@@ -40,7 +32,7 @@ JsonRoutes.add("get", "/findOne_post/:selector/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/insert_post/:doc", function(req, res, next) {
+JsonRoutes.add("get", "/insert_post/:doc", function (req, res, next) {
   res.charset = "utf-8";
   const doc = req.params.doc ? JSON.parse(req.params.doc) : {};
 
@@ -60,11 +52,7 @@ JsonRoutes.add("get", "/insert_post/:doc", function(req, res, next) {
   });
 });
 
-JsonRoutes.add("get", "/update_post/:selector/:modifier/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/update_post/:selector/:modifier/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const modifier = req.params.modifier ? JSON.parse(req.params.modifier) : {};
@@ -85,7 +73,7 @@ JsonRoutes.add("get", "/update_post/:selector/:modifier/:options", function(
   });
 });
 
-JsonRoutes.add("get", "/remove_post/:selector", function(req, res, next) {
+JsonRoutes.add("get", "/remove_post/:selector", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
 

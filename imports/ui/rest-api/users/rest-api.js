@@ -1,4 +1,4 @@
-import { TEACHERACCOUNT } from "./methods";
+import {USER} from "./methods";
 
 /*
 403: forbidden
@@ -8,43 +8,35 @@ import { TEACHERACCOUNT } from "./methods";
 304: not modified
 */
 
-JsonRoutes.add("get", "/find_teacherAccount/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/find_user/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
-  data.result = TEACHERACCOUNT.findTeacherAccount(selector, options);
+  data.result = USER.findUser(selector, options);
   data.code = "200";
   JsonRoutes.sendResult(res, {
     data: data
   });
 });
 
-JsonRoutes.add("get", "/findOne_teacherAccount/:selector/:options", function(
-  req,
-  res,
-  next
-) {
+JsonRoutes.add("get", "/findOne_user/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
-  data.result = TEACHERACCOUNT.findOneTeacherAccount(selector, options);
+  data.result = USER.findOneUser(selector, options);
   data.code = "200";
   JsonRoutes.sendResult(res, {
     data: data
   });
 });
 
-JsonRoutes.add("get", "/insert_teacherAccount/:user", function(req, res, next) {
+JsonRoutes.add("get", "/insert_user/:doc", function (req, res, next) {
   res.charset = "utf-8";
-  const user = req.params.user ? JSON.parse(req.params.user) : {};
+  const doc = req.params.doc ? JSON.parse(req.params.doc) : {};
 
-  TEACHERACCOUNT.insertTeacherAccount(user, (error, result) => {
+  USER.insertUser(doc, (error, result) => {
     let data = {};
     if (error) {
       data.code = "403";
@@ -60,11 +52,12 @@ JsonRoutes.add("get", "/insert_teacherAccount/:user", function(req, res, next) {
   });
 });
 
-JsonRoutes.add("get", "/update_teacherAccount/:user", function(req, res, next) {
+JsonRoutes.add("get", "/update_user/:selector/:modifier", function (req, res, next) {
   res.charset = "utf-8";
-  const user = req.params.user ? JSON.parse(req.params.user) : {};
+  const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
+  const modifier = req.params.modifier ? JSON.parse(req.params.modifier) : {};
 
-  TEACHERACCOUNT.updateTeacherAccount(user, (error, result) => {
+  USER.updateUser(selector, modifier, (error, result) => {
     let data = {};
     if (error) {
       data.code = "403";
@@ -80,11 +73,11 @@ JsonRoutes.add("get", "/update_teacherAccount/:user", function(req, res, next) {
   });
 });
 
-JsonRoutes.add("get", "/remove_teacherAccount/:_id", function(req, res, next) {
+JsonRoutes.add("get", "/remove_user/:selector", function (req, res, next) {
   res.charset = "utf-8";
-  const _id = req.params._id ? JSON.parse(req.params._id) : {};
+  const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
 
-  TEACHERACCOUNT.removeTeacherAccount(_id, (error, result) => {
+  USER.removeUser(selector, (error, result) => {
     let data = {};
     if (error) {
       data.code = "403";
