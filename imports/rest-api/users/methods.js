@@ -155,15 +155,15 @@ import {Meteor} from "meteor/meteor";
 
 //model
 export class USER {
-  static findUser(selector, options) {
+  static findUser(selector = {}, options = {}) {
     return Meteor.users.find(selector, options).fetch();
   }
 
-  static findOneUser(selector, options) {
+  static findOneUser(selector = {}, options = {}) {
     return Meteor.users.findOne(selector, options);
   }
 
-  static insertUser(doc) {
+  static insertUser(doc = {}) {
     try {
       return Accounts.createUser({
         username: doc.username,
@@ -176,7 +176,7 @@ export class USER {
     }
   }
 
-  static updateUser(selector, modifier) {
+  static updateUser(selector, modifier = {}) {
     try {
       // Update user
       Meteor.users.update(
@@ -198,7 +198,7 @@ export class USER {
     }
   }
 
-  static removeUser(selector) {
+  static removeUser(selector = {}) {
     try {
       return Meteor.users.remove(selector);
     } catch (e) {

@@ -1,5 +1,5 @@
 import {SUBJECT} from "./methods";
-
+import {sortArrayByKey} from "../../utils/sortArrayByKey";
 /*
 403: forbidden
 404: not found
@@ -13,7 +13,7 @@ JsonRoutes.add("get", "/find_subject/:selector/:options", function (req, res, ne
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
-  data.result = SUBJECT.findSubject(selector, options);
+  data.result = sortArrayByKey(SUBJECT.findSubject(selector, options), "khName");
   data.code = "200";
   JsonRoutes.sendResult(res, {
     data: data

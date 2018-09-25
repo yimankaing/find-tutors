@@ -7,12 +7,12 @@ import {Meteor} from "meteor/meteor";
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
 
-// import TeacherSchema from "./schema";
-import Teacher from "./collections";
+// import RateSchema from "./schema";
+import Rate from "./collections";
 
-// // Find
-// export const findTeacher = new ValidatedMethod({
-//   name: "Teacher.methods.findTeacher",
+// Find
+// export const findRate = new ValidatedMethod({
+//   name: "Rate.methods.findRate",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Teacher from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return TEACHER.findTeacher(selector, options);
+//       return RATE.findRate(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneTeacher = new ValidatedMethod({
-//   name: "Teacher.methods.findOneTeacher",
+// export const findOneRate = new ValidatedMethod({
+//   name: "Rate.methods.findOneRate",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Teacher from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return TEACHER.findOne(selector, options);
+//       return RATE.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertTeacher = new ValidatedMethod({
-//   name: "Teacher.methods.insertTeacher",
+// export const insertRate = new ValidatedMethod({
+//   name: "Rate.methods.insertRate",
 //   mixins: [CallPromiseMixin],
-//   validate: TeacherSchema.validator(),
+//   validate: RateSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertTeacher -> doc", doc);
+//       // console.log("insertRate -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_teachers"
+//           _id: "ft_Rate"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Teacher from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return TEACHER.insertTeacher(doc);
+//         return RATE.insertRate(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_teachers" },
+//           filter: { _id: "ft_Rate" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Teacher from "./collections";
 // });
 //
 // // Update
-// export const updateTeacher = new ValidatedMethod({
-//   name: "Teacher.methods.updateTeacher",
+// export const updateRate = new ValidatedMethod({
+//   name: "Rate.methods.updateRate",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(TeacherSchema)
+//   validate: _.clone(RateSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,48 @@ import Teacher from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return TEACHER.updateTeacher({ _id: doc._id }, doc);
+//       return RATE.updateRate({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeTeacher = new ValidatedMethod({
-//   name: "Teacher.methods.removeTeacher",
+// export const removeRate = new ValidatedMethod({
+//   name: "Rate.methods.removeRate",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return TEACHER.removeTeacher(_id);
+//       return RATE.removeRate(_id);
 //     }
 //   }
 // });
 
 //model
-export class TEACHER {
-  static findTeacher(selector, options) {
-    return Teacher.find(selector, options).fetch();
+export class RATE {
+  static findRate(selector = {}, options = {}) {
+    return Rate.find(selector, options).fetch();
   }
 
-  static findOneTeacher(selector, options) {
-    return Teacher.findOne(selector, options);
+  static findOneRate(selector = {}, options = {}) {
+    return Rate.findOne(selector, options);
   }
 
-  static insertTeacher(doc, callback) {
-    return Teacher.insert(doc, callback);
+  static insertRate(doc = {}, callback) {
+    return Rate.insert(doc, callback);
   }
 
-  static updateTeacher(selector, modifier, options, callback) {
-    return Teacher.update(selector, {$set: modifier}, options, callback);
+  static updateRate(selector = {}, modifier = {}, options = {}, callback) {
+    return Rate.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeTeacher(selector, callback) {
-    return Teacher.remove(selector, callback);
+  static removeRate(selector = {}, callback) {
+    return Rate.remove(selector, callback);
   }
 }
 
 // rateLimit({
-//   methods: [
-//     findTeacher,
-//     findOneTeacher,
-//     insertTeacher,
-//     updateTeacher,
-//     removeTeacher
-//   ]
+//   methods: [findRate, findOneRate, insertRate, updateRate, removeRate]
 // });

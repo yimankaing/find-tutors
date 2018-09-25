@@ -7,12 +7,12 @@ import {Meteor} from "meteor/meteor";
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
 //
-// import FeedbackSchema from "./schema";
-import Feedback from "./collections";
-
+// import UserFeedbackSchema from "./schema";
+import UserFeedback from "./collections";
+//
 // // Find
-// export const findFeedback = new ValidatedMethod({
-//   name: "Feedback.methods.findFeedback",
+// export const findUserFeedback = new ValidatedMethod({
+//   name: "UserFeedback.methods.findUserFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Feedback from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return FEEDBACK.findFeedback(selector, options);
+//       return USERFEEDBACK.findUserFeedback(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneFeedback = new ValidatedMethod({
-//   name: "Feedback.methods.findOneFeedback",
+// export const findOneUserFeedback = new ValidatedMethod({
+//   name: "UserFeedback.methods.findOneUserFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Feedback from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return FEEDBACK.findOne(selector, options);
+//       return USERFEEDBACK.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertFeedback = new ValidatedMethod({
-//   name: "Feedback.methods.insertFeedback",
+// export const insertUserFeedback = new ValidatedMethod({
+//   name: "UserFeedback.methods.insertUserFeedback",
 //   mixins: [CallPromiseMixin],
-//   validate: FeedbackSchema.validator(),
+//   validate: UserFeedbackSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertFeedback -> doc", doc);
+//       // console.log("insertUserFeedback -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_feedback"
+//           _id: "ft_userFeedback"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,24 +89,24 @@ import Feedback from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return FEEDBACK.insertFeedback(doc);
+//         return USERFEEDBACK.insertUserFeedback(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_feedback" },
+//           filter: { _id: "ft_userFeedback" },
 //           opts: { seq: -1 }
 //         });
 //       }
 //     }
 //   }
 // });
-
-// Update
-// export const updateFeedback = new ValidatedMethod({
-//   name: "Feedback.methods.updateFeedback",
+//
+// // Update
+// export const updateUserFeedback = new ValidatedMethod({
+//   name: "UserFeedback.methods.updateUserFeedback",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(FeedbackSchema)
+//   validate: _.clone(UserFeedbackSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,54 @@ import Feedback from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return FEEDBACK.updateFeedback({ _id: doc._id }, doc);
+//       return USERFEEDBACK.updateUserFeedback({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeFeedback = new ValidatedMethod({
-//   name: "Feedback.methods.removeFeedback",
+// export const removeUserFeedback = new ValidatedMethod({
+//   name: "UserFeedback.methods.removeUserFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return FEEDBACK.removeFeedback(_id);
+//       return USERFEEDBACK.removeUserFeedback(_id);
 //     }
 //   }
 // });
 
 //model
-export class FEEDBACK {
-  static findFeedback(selector, options) {
-    return Feedback.find(selector, options).fetch();
+export class USERFEEDBACK {
+  static findUserFeedback(selector={}, options={}) {
+    return UserFeedback.find(selector, options).fetch();
   }
 
-  static findOneFeedback(selector, options) {
-    return Feedback.findOne(selector, options);
+  static findOneUserFeedback(selector={}, options={}) {
+    return UserFeedback.findOne(selector, options);
   }
 
-  static insertFeedback(doc, callback) {
-    return Feedback.insert(doc, callback);
+  static insertUserFeedback(doc={}, callback) {
+    return UserFeedback.insert(doc, callback);
   }
 
-  static updateFeedback(selector, modifier, options, callback) {
-    return Feedback.update(selector, {$set: modifier}, options, callback);
+  static updateUserFeedback(selector={}, modifier={}, options={}, callback) {
+    return UserFeedback.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeFeedback(selector, callback) {
-    return Feedback.remove(selector, callback);
+  static removeUserFeedback(selector={}, callback) {
+    return UserFeedback.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findFeedback,
-//     findOneFeedback,
-//     insertFeedback,
-//     updateFeedback,
-//     removeFeedback
+//     findUserFeedback,
+//     findOneUserFeedback,
+//     insertUserFeedback,
+//     updateUserFeedback,
+//     removeUserFeedback
 //   ]
 // });

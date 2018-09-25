@@ -68,7 +68,7 @@ import Notify from "/imports/ui/lib/notify";
 // Libs
 import LookupValue from "../lib/lookup-value";
 
-import { insertSubject, findOneSubject } from "../rest-api/subjects/methods";
+import { insertSubject, findOneSubject } from "../../rest-api/subjects/methods";
 
 export default {
   name: "SubjectNew",

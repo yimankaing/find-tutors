@@ -3,16 +3,16 @@ import {Meteor} from "meteor/meteor";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-//
+
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
 //
-// import CommentSchema from "./schema";
-import Comment from "./collections";
+// import FollowerSchema from "./schema";
+import Follower from "./collections";
 
 // Find
-// export const findComment = new ValidatedMethod({
-//   name: "Comment.methods.findComment",
+// export const findFollower = new ValidatedMethod({
+//   name: "Follower.methods.findFollower",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Comment from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return COMMENT.findComment(selector, options);
+//       return FOLLOWER.findFollower(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneComment = new ValidatedMethod({
-//   name: "Comment.methods.findOneComment",
+// export const findOneFollower = new ValidatedMethod({
+//   name: "Follower.methods.findOneFollower",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Comment from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return COMMENT.findOne(selector, options);
+//       return FOLLOWER.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertComment = new ValidatedMethod({
-//   name: "Comment.methods.insertComment",
+// export const insertFollower = new ValidatedMethod({
+//   name: "Follower.methods.insertFollower",
 //   mixins: [CallPromiseMixin],
-//   validate: CommentSchema.validator(),
+//   validate: FollowerSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertComment -> doc", doc);
+//       // console.log("insertFollower -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_comments"
+//           _id: "ft_followers"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Comment from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return COMMENT.insertComment(doc);
+//         return FOLLOWER.insertFollower(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_comments" },
+//           filter: { _id: "ft_followers" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Comment from "./collections";
 // });
 //
 // // Update
-// export const updateComment = new ValidatedMethod({
-//   name: "Comment.methods.updateComment",
+// export const updateFollower = new ValidatedMethod({
+//   name: "Follower.methods.updateFollower",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(CommentSchema)
+//   validate: _.clone(FollowerSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,54 @@ import Comment from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return COMMENT.updateComment({ _id: doc._id }, doc);
+//       return FOLLOWER.updateFollower({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeComment = new ValidatedMethod({
-//   name: "Comment.methods.removeComment",
+// export const removeFollower = new ValidatedMethod({
+//   name: "Follower.methods.removeFollower",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return COMMENT.removeComment(_id);
+//       return FOLLOWER.removeFollower(_id);
 //     }
 //   }
 // });
 
 //model
-export class COMMENT {
-  static findComment(selector, options) {
-    return Comment.find(selector, options).fetch();
+export class FOLLOWER {
+  static findFollower(selector = {}, options = {}) {
+    return Follower.find(selector, options).fetch();
   }
 
-  static findOneComment(selector, options) {
-    return Comment.findOne(selector, options);
+  static findOneFollower(selector = {}, options = {}) {
+    return Follower.findOne(selector, options);
   }
 
-  static insertComment(doc, callback) {
-    return Comment.insert(doc, callback);
+  static insertFollower(doc = {}, callback) {
+    return Follower.insert(doc, callback);
   }
 
-  static updateComment(selector, modifier, options, callback) {
-    return Comment.update(selector, {$set: modifier}, options, callback);
+  static updateFollower(selector = {}, modifier = {}, options = {}, callback) {
+    return Follower.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeComment(selector, callback) {
-    return Comment.remove(selector, callback);
+  static removeFollower(selector = {}, callback) {
+    return Follower.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findComment,
-//     findOneComment,
-//     insertComment,
-//     updateComment,
-//     removeComment
+//     findFollower,
+//     findOneFollower,
+//     insertFollower,
+//     updateFollower,
+//     removeFollower
 //   ]
 // });

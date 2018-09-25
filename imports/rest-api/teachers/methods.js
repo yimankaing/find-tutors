@@ -3,16 +3,16 @@ import {Meteor} from "meteor/meteor";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-//
+
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
-//
-// import LikeSchema from "./schema";
-import Like from "./collections";
 
-// Find
-// export const findLike = new ValidatedMethod({
-//   name: "Like.methods.findLike",
+// import TeacherSchema from "./schema";
+import Teacher from "./collections";
+
+// // Find
+// export const findTeacher = new ValidatedMethod({
+//   name: "Teacher.methods.findTeacher",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Like from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return LIKE.findLike(selector, options);
+//       return TEACHER.findTeacher(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneLike = new ValidatedMethod({
-//   name: "Like.methods.findOneLike",
+// export const findOneTeacher = new ValidatedMethod({
+//   name: "Teacher.methods.findOneTeacher",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Like from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return LIKE.findOne(selector, options);
+//       return TEACHER.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertLike = new ValidatedMethod({
-//   name: "Like.methods.insertLike",
+// export const insertTeacher = new ValidatedMethod({
+//   name: "Teacher.methods.insertTeacher",
 //   mixins: [CallPromiseMixin],
-//   validate: LikeSchema.validator(),
+//   validate: TeacherSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertLike -> doc", doc);
+//       // console.log("insertTeacher -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_likes"
+//           _id: "ft_teachers"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Like from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return Like.insertLike(doc);
+//         return TEACHER.insertTeacher(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_likes" },
+//           filter: { _id: "ft_teachers" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Like from "./collections";
 // });
 //
 // // Update
-// export const updateLike = new ValidatedMethod({
-//   name: "Like.methods.updateLike",
+// export const updateTeacher = new ValidatedMethod({
+//   name: "Teacher.methods.updateTeacher",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(LikeSchema)
+//   validate: _.clone(TeacherSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,48 +114,54 @@ import Like from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return LIKE.updateLike({ _id: doc._id }, doc);
+//       return TEACHER.updateTeacher({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeLike = new ValidatedMethod({
-//   name: "Like.methods.removeLike",
+// export const removeTeacher = new ValidatedMethod({
+//   name: "Teacher.methods.removeTeacher",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return LIKE.removeLike(_id);
+//       return TEACHER.removeTeacher(_id);
 //     }
 //   }
 // });
 
 //model
-export class LIKE {
-  static findLike(selector, options) {
-    return Like.find(selector, options).fetch();
+export class TEACHER {
+  static findTeacher(selector = {}, options = {}) {
+    return Teacher.find(selector, options).fetch();
   }
 
-  static findOneLike(selector, options) {
-    return Like.findOne(selector, options);
+  static findOneTeacher(selector = {}, options = {}) {
+    return Teacher.findOne(selector, options);
   }
 
-  static insertLike(doc, callback) {
-    return Like.insert(doc, callback);
+  static insertTeacher(doc = {}, callback) {
+    return Teacher.insert(doc, callback);
   }
 
-  static updateLike(selector, modifier, options, callback) {
-    return Like.update(selector, {$set: modifier}, options, callback);
+  static updateTeacher(selector = {}, modifier = {}, options = {}, callback) {
+    return Teacher.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeLike(selector, callback) {
-    return Like.remove(selector, callback);
+  static removeTeacher(selector = {}, callback) {
+    return Teacher.remove(selector, callback);
   }
 }
 
 // rateLimit({
-//   methods: [findLike, findOneLike, insertLike, updateLike, removeLike]
+//   methods: [
+//     findTeacher,
+//     findOneTeacher,
+//     insertTeacher,
+//     updateTeacher,
+//     removeTeacher
+//   ]
 // });

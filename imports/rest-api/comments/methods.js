@@ -7,12 +7,12 @@ import {Meteor} from "meteor/meteor";
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
 //
-// import UserFeedbackSchema from "./schema";
-import UserFeedback from "./collections";
-//
-// // Find
-// export const findUserFeedback = new ValidatedMethod({
-//   name: "UserFeedback.methods.findUserFeedback",
+// import CommentSchema from "./schema";
+import Comment from "./collections";
+
+// Find
+// export const findComment = new ValidatedMethod({
+//   name: "Comment.methods.findComment",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import UserFeedback from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return USERFEEDBACK.findUserFeedback(selector, options);
+//       return COMMENT.findComment(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneUserFeedback = new ValidatedMethod({
-//   name: "UserFeedback.methods.findOneUserFeedback",
+// export const findOneComment = new ValidatedMethod({
+//   name: "Comment.methods.findOneComment",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import UserFeedback from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return USERFEEDBACK.findOne(selector, options);
+//       return COMMENT.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertUserFeedback = new ValidatedMethod({
-//   name: "UserFeedback.methods.insertUserFeedback",
+// export const insertComment = new ValidatedMethod({
+//   name: "Comment.methods.insertComment",
 //   mixins: [CallPromiseMixin],
-//   validate: UserFeedbackSchema.validator(),
+//   validate: CommentSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertUserFeedback -> doc", doc);
+//       // console.log("insertComment -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_userFeedback"
+//           _id: "ft_comments"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import UserFeedback from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return USERFEEDBACK.insertUserFeedback(doc);
+//         return COMMENT.insertComment(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_userFeedback" },
+//           filter: { _id: "ft_comments" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import UserFeedback from "./collections";
 // });
 //
 // // Update
-// export const updateUserFeedback = new ValidatedMethod({
-//   name: "UserFeedback.methods.updateUserFeedback",
+// export const updateComment = new ValidatedMethod({
+//   name: "Comment.methods.updateComment",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(UserFeedbackSchema)
+//   validate: _.clone(CommentSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,54 @@ import UserFeedback from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return USERFEEDBACK.updateUserFeedback({ _id: doc._id }, doc);
+//       return COMMENT.updateComment({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeUserFeedback = new ValidatedMethod({
-//   name: "UserFeedback.methods.removeUserFeedback",
+// export const removeComment = new ValidatedMethod({
+//   name: "Comment.methods.removeComment",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return USERFEEDBACK.removeUserFeedback(_id);
+//       return COMMENT.removeComment(_id);
 //     }
 //   }
 // });
 
 //model
-export class USERFEEDBACK {
-  static findUserFeedback(selector, options) {
-    return UserFeedback.find(selector, options).fetch();
+export class COMMENT {
+  static findComment(selector = {}, options = {}) {
+    return Comment.find(selector, options).fetch();
   }
 
-  static findOneUserFeedback(selector, options) {
-    return UserFeedback.findOne(selector, options);
+  static findOneComment(selector = {}, options = {}) {
+    return Comment.findOne(selector, options);
   }
 
-  static insertUserFeedback(doc, callback) {
-    return UserFeedback.insert(doc, callback);
+  static insertComment(doc = {}, callback) {
+    return Comment.insert(doc, callback);
   }
 
-  static updateUserFeedback(selector, modifier, options, callback) {
-    return UserFeedback.update(selector, {$set: modifier}, options, callback);
+  static updateComment(selector = {}, modifier = {}, options = {}, callback) {
+    return Comment.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeUserFeedback(selector, callback) {
-    return UserFeedback.remove(selector, callback);
+  static removeComment(selector = {}, callback) {
+    return Comment.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findUserFeedback,
-//     findOneUserFeedback,
-//     insertUserFeedback,
-//     updateUserFeedback,
-//     removeUserFeedback
+//     findComment,
+//     findOneComment,
+//     insertComment,
+//     updateComment,
+//     removeComment
 //   ]
 // });

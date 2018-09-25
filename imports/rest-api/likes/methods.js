@@ -3,16 +3,16 @@ import {Meteor} from "meteor/meteor";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-
+//
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
-
-// import PostSchema from "./schema";
-import Post from "./collections";
+//
+// import LikeSchema from "./schema";
+import Like from "./collections";
 
 // Find
-// export const findPost = new ValidatedMethod({
-//   name: "Post.methods.findPost",
+// export const findLike = new ValidatedMethod({
+//   name: "Like.methods.findLike",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Post from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return Post.findPost(selector, options);
+//       return LIKE.findLike(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOnePost = new ValidatedMethod({
-//   name: "Post.methods.findOnePost",
+// export const findOneLike = new ValidatedMethod({
+//   name: "Like.methods.findOneLike",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Post from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return Post.findOne(selector, options);
+//       return LIKE.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertPost = new ValidatedMethod({
-//   name: "Post.methods.insertPost",
+// export const insertLike = new ValidatedMethod({
+//   name: "Like.methods.insertLike",
 //   mixins: [CallPromiseMixin],
-//   validate: PostSchema.validator(),
+//   validate: LikeSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertPost -> doc", doc);
+//       // console.log("insertLike -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_posts"
+//           _id: "ft_likes"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Post from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return Post.insertPost(doc);
+//         return Like.insertLike(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_posts" },
+//           filter: { _id: "ft_likes" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Post from "./collections";
 // });
 //
 // // Update
-// export const updatePost = new ValidatedMethod({
-//   name: "Post.methods.updatePost",
+// export const updateLike = new ValidatedMethod({
+//   name: "Like.methods.updateLike",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(PostSchema)
+//   validate: _.clone(LikeSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,48 +114,48 @@ import Post from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return Post.updatePost({ _id: doc._id }, doc);
+//       return LIKE.updateLike({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removePost = new ValidatedMethod({
-//   name: "Post.methods.removePost",
+// export const removeLike = new ValidatedMethod({
+//   name: "Like.methods.removeLike",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return Post.removePost(_id);
+//       return LIKE.removeLike(_id);
 //     }
 //   }
 // });
 
 //model
-export class POST {
-  static findPost(selector, options) {
-    return Post.find(selector, options).fetch();
+export class LIKE {
+  static findLike(selector={}, options={}) {
+    return Like.find(selector, options).fetch();
   }
 
-  static findOnePost(selector, options) {
-    return Post.findOne(selector, options);
+  static findOneLike(selector={}, options={}) {
+    return Like.findOne(selector, options);
   }
 
-  static insertPost(doc, callback) {
-    return Post.insert(doc, callback);
+  static insertLike(doc={}, callback) {
+    return Like.insert(doc, callback);
   }
 
-  static updatePost(selector, modifier, options, callback) {
-    return Post.update(selector, {$set: modifier}, options, callback);
+  static updateLike(selector={}, modifier={}, options={}, callback) {
+    return Like.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removePost(selector, callback) {
-    return Post.remove(selector, callback);
+  static removeLike(selector={}, callback) {
+    return Like.remove(selector, callback);
   }
 }
 
 // rateLimit({
-//   methods: [findPost, findOnePost, insertPost, updatePost, removePost]
+//   methods: [findLike, findOneLike, insertLike, updateLike, removeLike]
 // });

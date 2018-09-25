@@ -6,13 +6,13 @@ import {Meteor} from "meteor/meteor";
 //
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
-
-// import SubjectSchema from "./schema";
-import Subject from "./collection";
+//
+// import FollowingSchema from "./schema";
+import Following from "./collections";
 
 // Find
-// export const findSubject = new ValidatedMethod({
-//   name: "Subject.methods.findSubject",
+// export const findFollowing = new ValidatedMethod({
+//   name: "Following.methods.findFollowing",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Subject from "./collection";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return SUBJECT.findSubject(selector, options);
+//       return FOLLOWING.findFollowing(selector, options);
 //     }
 //   }
 // });
-
+//
 // // Find One
-// export const findOneSubject = new ValidatedMethod({
-//   name: "Subject.methods.findOneSubject",
+// export const findOneFollowing = new ValidatedMethod({
+//   name: "Following.methods.findOneFollowing",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Subject from "./collection";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return SUBJECT.findOne(selector, options);
+//       return FOLLOWING.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertSubject = new ValidatedMethod({
-//   name: "Subject.methods.insertSubject",
+// export const insertFollowing = new ValidatedMethod({
+//   name: "Following.methods.insertFollowing",
 //   mixins: [CallPromiseMixin],
-//   validate: SubjectSchema.validator(),
+//   validate: FollowingSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertSubject -> doc", doc);
+//       // console.log("insertFollowing -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_subjects"
+//           _id: "ft_Followings"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Subject from "./collection";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return SUBJECT.insertSubject(doc);
+//         return FOLLOWING.insertFollowing(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_subjects" },
+//           filter: { _id: "ft_Followings" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Subject from "./collection";
 // });
 //
 // // Update
-// export const updateSubject = new ValidatedMethod({
-//   name: "Subject.methods.updateSubject",
+// export const updateFollowing = new ValidatedMethod({
+//   name: "Following.methods.updateFollowing",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(SubjectSchema)
+//   validate: _.clone(FollowingSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,53 +114,54 @@ import Subject from "./collection";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return SUBJECT.updateSubject({ _id: doc._id }, doc);
+//       return FOLLOWING.updateFollowing({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeSubject = new ValidatedMethod({
-//   name: "Subject.methods.removeSubject",
+// export const removeFollowing = new ValidatedMethod({
+//   name: "Following.methods.removeFollowing",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return SUBJECT.removeSubject(_id);
+//       return FOLLOWING.removeFollowing(_id);
 //     }
 //   }
 // });
 
-export class SUBJECT {
-  static findSubject(selector, options) {
-    return Subject.find(selector, options).fetch();
+//model
+export class FOLLOWING {
+  static findFollowing(selector = {}, options = {}) {
+    return Following.find(selector, options).fetch();
   }
 
-  static findOneSubject(selector, options) {
-    return Subject.findOne(selector, options);
+  static findOneFollowing(selector = {}, options = {}) {
+    return Following.findOne(selector, options);
   }
 
-  static insertSubject(doc, callback) {
-    return Subject.insert(doc, callback);
+  static insertFollowing(doc = {}, callback) {
+    return Following.insert(doc, callback);
   }
 
-  static updateSubject(selector, modifier, options, callback) {
-    return Subject.update(selector, {$set: modifier}, options, callback);
+  static updateFollowing(selector = {}, modifier = {}, options = {}, callback) {
+    return Following.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeSubject(selector, callback) {
-    return Subject.remove(selector, callback);
+  static removeFollowing(selector = {}, callback) {
+    return Following.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findSubject,
-//     findOneSubject,
-//     insertSubject,
-//     updateSubject,
-//     removeSubject
+//     findFollowing,
+//     findOneFollowing,
+//     insertFollowing,
+//     updateFollowing,
+//     removeFollowing
 //   ]
 // });

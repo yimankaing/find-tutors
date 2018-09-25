@@ -70,7 +70,7 @@ import LookupValue from "../lib/lookup-value";
 
 import { validateUserExist } from "../../utils/validate-methods";
 import { findOneUser, updateUser } from "../api/users/methods";
-import { updateSubject } from "../rest-api/subjects/methods";
+import { updateSubject } from "../../rest-api/subjects/methods";
 
 export default {
   name: "SubjectEdit",

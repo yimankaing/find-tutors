@@ -7,12 +7,12 @@ import {Meteor} from "meteor/meteor";
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
 //
-// import FollowingSchema from "./schema";
-import Following from "./collections";
+// import FeedbackSchema from "./schema";
+import Feedback from "./collections";
 
-// Find
-// export const findFollowing = new ValidatedMethod({
-//   name: "Following.methods.findFollowing",
+// // Find
+// export const findFeedback = new ValidatedMethod({
+//   name: "Feedback.methods.findFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Following from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return FOLLOWING.findFollowing(selector, options);
+//       return FEEDBACK.findFeedback(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneFollowing = new ValidatedMethod({
-//   name: "Following.methods.findOneFollowing",
+// export const findOneFeedback = new ValidatedMethod({
+//   name: "Feedback.methods.findOneFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Following from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return FOLLOWING.findOne(selector, options);
+//       return FEEDBACK.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertFollowing = new ValidatedMethod({
-//   name: "Following.methods.insertFollowing",
+// export const insertFeedback = new ValidatedMethod({
+//   name: "Feedback.methods.insertFeedback",
 //   mixins: [CallPromiseMixin],
-//   validate: FollowingSchema.validator(),
+//   validate: FeedbackSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertFollowing -> doc", doc);
+//       // console.log("insertFeedback -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_Followings"
+//           _id: "ft_feedback"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,24 +89,24 @@ import Following from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return FOLLOWING.insertFollowing(doc);
+//         return FEEDBACK.insertFeedback(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_Followings" },
+//           filter: { _id: "ft_feedback" },
 //           opts: { seq: -1 }
 //         });
 //       }
 //     }
 //   }
 // });
-//
-// // Update
-// export const updateFollowing = new ValidatedMethod({
-//   name: "Following.methods.updateFollowing",
+
+// Update
+// export const updateFeedback = new ValidatedMethod({
+//   name: "Feedback.methods.updateFeedback",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(FollowingSchema)
+//   validate: _.clone(FeedbackSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,54 @@ import Following from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return FOLLOWING.updateFollowing({ _id: doc._id }, doc);
+//       return FEEDBACK.updateFeedback({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeFollowing = new ValidatedMethod({
-//   name: "Following.methods.removeFollowing",
+// export const removeFeedback = new ValidatedMethod({
+//   name: "Feedback.methods.removeFeedback",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return FOLLOWING.removeFollowing(_id);
+//       return FEEDBACK.removeFeedback(_id);
 //     }
 //   }
 // });
 
 //model
-export class FOLLOWING {
-  static findFollowing(selector, options) {
-    return Following.find(selector, options).fetch();
+export class FEEDBACK {
+  static findFeedback(selector = {}, options = {}) {
+    return Feedback.find(selector, options).fetch();
   }
 
-  static findOneFollowing(selector, options) {
-    return Following.findOne(selector, options);
+  static findOneFeedback(selector = {}, options = {}) {
+    return Feedback.findOne(selector, options);
   }
 
-  static insertFollowing(doc, callback) {
-    return Following.insert(doc, callback);
+  static insertFeedback(doc = {}, callback) {
+    return Feedback.insert(doc, callback);
   }
 
-  static updateFollowing(selector, modifier, options, callback) {
-    return Following.update(selector, {$set: modifier}, options, callback);
+  static updateFeedback(selector = {}, modifier = {}, options = {}, callback) {
+    return Feedback.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeFollowing(selector, callback) {
-    return Following.remove(selector, callback);
+  static removeFeedback(selector = {}, callback) {
+    return Feedback.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findFollowing,
-//     findOneFollowing,
-//     insertFollowing,
-//     updateFollowing,
-//     removeFollowing
+//     findFeedback,
+//     findOneFeedback,
+//     insertFeedback,
+//     updateFeedback,
+//     removeFeedback
 //   ]
 // });

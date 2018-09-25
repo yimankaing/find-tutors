@@ -11,7 +11,7 @@ import rateLimit from "./rate-limit";
 
 //Collection
 
-import Subject from "../ui/rest-api/subjects/collection";
+import Subject from "../rest-api/subjects/collection";
 
 // Use exist
 export const validateUserExist = new ValidatedMethod({

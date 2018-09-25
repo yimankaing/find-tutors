@@ -1,40 +1,40 @@
 //REST API
 //user account
-import "../../ui/rest-api/users/methods";
-import "../../ui/rest-api/users/rest-api";
+import "../../rest-api/users/methods";
+import "../../rest-api/users/rest-api";
 //subjects
-import "../../ui/rest-api/subjects/methods";
-import "../../ui/rest-api/subjects/rest-api";
+import "../../rest-api/subjects/methods";
+import "../../rest-api/subjects/rest-api";
 //students
-import "../../ui/rest-api/students/methods";
-import "../../ui/rest-api/students/rest-api";
+import "../../rest-api/students/methods";
+import "../../rest-api/students/rest-api";
 //teachers
-import "../../ui/rest-api/teachers/methods";
-import "../../ui/rest-api/teachers/rest-api";
+import "../../rest-api/teachers/methods";
+import "../../rest-api/teachers/rest-api";
 //followers
-import "../../ui/rest-api/followers/methods";
-import "../../ui/rest-api/followers/rest-api";
+import "../../rest-api/followers/methods";
+import "../../rest-api/followers/rest-api";
 //following
-import "../../ui/rest-api/following/methods";
-import "../../ui/rest-api/following/rest-api";
+import "../../rest-api/following/methods";
+import "../../rest-api/following/rest-api";
 //posts
-import "../../ui/rest-api/posts/methods";
-import "../../ui/rest-api/posts/rest-api";
+import "../../rest-api/posts/methods";
+import "../../rest-api/posts/rest-api";
 //messages
-import "../../ui/rest-api/messages/methods";
-import "../../ui/rest-api/messages/rest-api";
+import "../../rest-api/messages/methods";
+import "../../rest-api/messages/rest-api";
 //comments
-import "../../ui/rest-api/comments/methods";
-import "../../ui/rest-api/comments/rest-api";
+import "../../rest-api/comments/methods";
+import "../../rest-api/comments/rest-api";
 //comments
-import "../../ui/rest-api/likes/methods";
-import "../../ui/rest-api/likes/rest-api";
+import "../../rest-api/likes/methods";
+import "../../rest-api/likes/rest-api";
 //feedback
-import "../../ui/rest-api/feedback/methods";
-import "../../ui/rest-api/feedback/rest-api";
+import "../../rest-api/feedback/methods";
+import "../../rest-api/feedback/rest-api";
 //user-feedback
-import "../../ui/rest-api/user-feedback/methods";
-import "../../ui/rest-api/user-feedback/rest-api";
+import "../../rest-api/user-feedback/methods";
+import "../../rest-api/user-feedback/rest-api";
 //rates
-import "../../ui/rest-api/rates/methods";
-import "../../ui/rest-api/rates/rest-api";
+import "../../rest-api/rates/methods";
+import "../../rest-api/rates/rest-api";

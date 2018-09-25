@@ -1,18 +1,18 @@
-import { Meteor } from "meteor/meteor";
+import {Meteor} from "meteor/meteor";
 // import { ValidatedMethod } from "meteor/mdg:validated-method";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-//
+
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
-//
-// import MessageSchema from "./schema";
-import Message from "./collections";
 
-// // Find
-// export const findMessage = new ValidatedMethod({
-//   name: "Message.methods.findMessage",
+// import PostSchema from "./schema";
+import Post from "./collections";
+
+// Find
+// export const findPost = new ValidatedMethod({
+//   name: "Post.methods.findPost",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Message from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return MESSAGE.findMessage(selector, options);
+//       return Post.findPost(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneMessage = new ValidatedMethod({
-//   name: "Message.methods.findOneMessage",
+// export const findOnePost = new ValidatedMethod({
+//   name: "Post.methods.findOnePost",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Message from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return MESSAGE.findOne(selector, options);
+//       return Post.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertMessage = new ValidatedMethod({
-//   name: "Message.methods.insertMessage",
+// export const insertPost = new ValidatedMethod({
+//   name: "Post.methods.insertPost",
 //   mixins: [CallPromiseMixin],
-//   validate: MessageSchema.validator(),
+//   validate: PostSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertMessage -> doc", doc);
+//       // console.log("insertPost -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_Messages"
+//           _id: "ft_posts"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Message from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return MESSAGE.insertMessage(doc);
+//         return Post.insertPost(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_Messages" },
+//           filter: { _id: "ft_posts" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Message from "./collections";
 // });
 //
 // // Update
-// export const updateMessage = new ValidatedMethod({
-//   name: "Message.methods.updateMessage",
+// export const updatePost = new ValidatedMethod({
+//   name: "Post.methods.updatePost",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(MessageSchema)
+//   validate: _.clone(PostSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,48 @@ import Message from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return MESSAGE.updateMessage({ _id: doc._id }, doc);
+//       return Post.updatePost({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeMessage = new ValidatedMethod({
-//   name: "Message.methods.removeMessage",
+// export const removePost = new ValidatedMethod({
+//   name: "Post.methods.removePost",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return MESSAGE.removeMessage(_id);
+//       return Post.removePost(_id);
 //     }
 //   }
 // });
 
 //model
-export class MESSAGE {
-  static findMessage(selector, options) {
-    return Message.find(selector, options).fetch();
+export class POST {
+  static findPost(selector = {}, options = {}) {
+    return Post.find(selector, options).fetch();
   }
 
-  static findOneMessage(selector, options) {
-    return Message.findOne(selector, options);
+  static findOnePost(selector = {}, options = {}) {
+    return Post.findOne(selector, options);
   }
 
-  static insertMessage(doc, callback) {
-    return Message.insert(doc, callback);
+  static insertPost(doc = {}, callback) {
+    return Post.insert(doc, callback);
   }
 
-  static updateMessage(selector, modifier, options, callback) {
-    return Message.update(selector, { $set: modifier }, options, callback);
+  static updatePost(selector = {}, modifier = {}, options = {}, callback) {
+    return Post.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeMessage(selector, callback) {
-    return Message.remove(selector, callback);
+  static removePost(selector = {}, callback) {
+    return Post.remove(selector, callback);
   }
 }
 
 // rateLimit({
-//   methods: [
-//     findMessage,
-//     findOneMessage,
-//     insertMessage,
-//     updateMessage,
-//     removeMessage
-//   ]
+//   methods: [findPost, findOnePost, insertPost, updatePost, removePost]
 // });

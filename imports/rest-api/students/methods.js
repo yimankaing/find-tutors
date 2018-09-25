@@ -134,23 +134,23 @@ import Student from "./collections";
 
 //model
 export class STUDENT {
-  static findStudent(selector, options) {
+  static findStudent(selector={}, options={}) {
     return Student.find(selector, options).fetch();
   }
 
-  static findOneStudent(selector, options) {
+  static findOneStudent(selector={}, options={}) {
     return Student.findOne(selector, options);
   }
 
-  static insertStudent(doc, callback) {
+  static insertStudent(doc={}, callback) {
     return Student.insert(doc, callback);
   }
 
-  static updateStudent(selector, modifier, options, callback) {
+  static updateStudent(selector={}, modifier={}, options={}, callback) {
     return Student.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeStudent(selector, callback) {
+  static removeStudent(selector={}, callback) {
     return Student.remove(selector, callback);
   }
 }

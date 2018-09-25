@@ -3,16 +3,16 @@ import {Meteor} from "meteor/meteor";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-
+//
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
+//
+// import MessageSchema from "./schema";
+import Message from "./collections";
 
-// import RateSchema from "./schema";
-import Rate from "./collections";
-
-// Find
-// export const findRate = new ValidatedMethod({
-//   name: "Rate.methods.findRate",
+// // Find
+// export const findMessage = new ValidatedMethod({
+//   name: "Message.methods.findMessage",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Rate from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return RATE.findRate(selector, options);
+//       return MESSAGE.findMessage(selector, options);
 //     }
 //   }
 // });
 //
 // // Find One
-// export const findOneRate = new ValidatedMethod({
-//   name: "Rate.methods.findOneRate",
+// export const findOneMessage = new ValidatedMethod({
+//   name: "Message.methods.findOneMessage",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Rate from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return RATE.findOne(selector, options);
+//       return MESSAGE.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertRate = new ValidatedMethod({
-//   name: "Rate.methods.insertRate",
+// export const insertMessage = new ValidatedMethod({
+//   name: "Message.methods.insertMessage",
 //   mixins: [CallPromiseMixin],
-//   validate: RateSchema.validator(),
+//   validate: MessageSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertRate -> doc", doc);
+//       // console.log("insertMessage -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_Rate"
+//           _id: "ft_Messages"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Rate from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return RATE.insertRate(doc);
+//         return MESSAGE.insertMessage(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_Rate" },
+//           filter: { _id: "ft_Messages" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Rate from "./collections";
 // });
 //
 // // Update
-// export const updateRate = new ValidatedMethod({
-//   name: "Rate.methods.updateRate",
+// export const updateMessage = new ValidatedMethod({
+//   name: "Message.methods.updateMessage",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(RateSchema)
+//   validate: _.clone(MessageSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,48 +114,54 @@ import Rate from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return RATE.updateRate({ _id: doc._id }, doc);
+//       return MESSAGE.updateMessage({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeRate = new ValidatedMethod({
-//   name: "Rate.methods.removeRate",
+// export const removeMessage = new ValidatedMethod({
+//   name: "Message.methods.removeMessage",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return RATE.removeRate(_id);
+//       return MESSAGE.removeMessage(_id);
 //     }
 //   }
 // });
 
 //model
-export class RATE {
-  static findRate(selector, options) {
-    return Rate.find(selector, options).fetch();
+export class MESSAGE {
+  static findMessage(selector = {}, options = {}) {
+    return Message.find(selector, options).fetch();
   }
 
-  static findOneRate(selector, options) {
-    return Rate.findOne(selector, options);
+  static findOneMessage(selector = {}, options = {}) {
+    return Message.findOne(selector, options);
   }
 
-  static insertRate(doc, callback) {
-    return Rate.insert(doc, callback);
+  static insertMessage(doc = {}, callback) {
+    return Message.insert(doc, callback);
   }
 
-  static updateRate(selector, modifier, options, callback) {
-    return Rate.update(selector, {$set: modifier}, options, callback);
+  static updateMessage(selector = {}, modifier = {}, options = {}, callback) {
+    return Message.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeRate(selector, callback) {
-    return Rate.remove(selector, callback);
+  static removeMessage(selector = {}, callback) {
+    return Message.remove(selector, callback);
   }
 }
 
 // rateLimit({
-//   methods: [findRate, findOneRate, insertRate, updateRate, removeRate]
+//   methods: [
+//     findMessage,
+//     findOneMessage,
+//     insertMessage,
+//     updateMessage,
+//     removeMessage
+//   ]
 // });

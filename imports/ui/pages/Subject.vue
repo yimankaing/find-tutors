@@ -77,7 +77,7 @@ import {
   removeSubject
   // softRemoveBranch,
   // restoreBranch,
-} from "../rest-api/subjects/methods.js";
+} from "../../rest-api/subjects/methods.js";
 
 import subjectNew from "../pages/SubjectNew";
 import subjectEdit from "../pages/SubjectEdit";

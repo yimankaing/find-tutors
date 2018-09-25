@@ -3,16 +3,16 @@ import {Meteor} from "meteor/meteor";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
 // import SimpleSchema from "simpl-schema";
 // import _ from "lodash";
-
+//
 // import rateLimit from "/imports/utils/rate-limit";
 // import getNextSeq from "/imports/utils/get-next-seq";
-//
-// import FollowerSchema from "./schema";
-import Follower from "./collections";
+
+// import SubjectSchema from "./schema";
+import Subject from "./collection";
 
 // Find
-// export const findFollower = new ValidatedMethod({
-//   name: "Follower.methods.findFollower",
+// export const findSubject = new ValidatedMethod({
+//   name: "Subject.methods.findSubject",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -30,14 +30,14 @@ import Follower from "./collections";
 //     if (Meteor.isServer) {
 //       selector = selector || {};
 //       options = options || {};
-//       return FOLLOWER.findFollower(selector, options);
+//       return SUBJECT.findSubject(selector, options);
 //     }
 //   }
 // });
-//
+
 // // Find One
-// export const findOneFollower = new ValidatedMethod({
-//   name: "Follower.methods.findOneFollower",
+// export const findOneSubject = new ValidatedMethod({
+//   name: "Subject.methods.findOneSubject",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     selector: {
@@ -58,24 +58,24 @@ import Follower from "./collections";
 //       selector = selector || {};
 //       options = options || {};
 //
-//       return FOLLOWER.findOne(selector, options);
+//       return SUBJECT.findOne(selector, options);
 //     }
 //   }
 // });
 //
 // // Insert
-// export const insertFollower = new ValidatedMethod({
-//   name: "Follower.methods.insertFollower",
+// export const insertSubject = new ValidatedMethod({
+//   name: "Subject.methods.insertSubject",
 //   mixins: [CallPromiseMixin],
-//   validate: FollowerSchema.validator(),
+//   validate: SubjectSchema.validator(),
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       // console.log("insertFollower -> doc", doc);
+//       // console.log("insertSubject -> doc", doc);
 //       const _id = getNextSeq({
 //         // Mandatory
 //         filter: {
-//           _id: "ft_followers"
+//           _id: "ft_subjects"
 //           // type: '001' // BranchId
 //         },
 //         // Optional
@@ -89,11 +89,11 @@ import Follower from "./collections";
 //       });
 //       try {
 //         doc._id = _id.toString();
-//         return FOLLOWER.insertFollower(doc);
+//         return SUBJECT.insertSubject(doc);
 //       } catch (error) {
 //         // Decrement seq
 //         getNextSeq({
-//           filter: { _id: "ft_followers" },
+//           filter: { _id: "ft_subjects" },
 //           opts: { seq: -1 }
 //         });
 //       }
@@ -102,11 +102,11 @@ import Follower from "./collections";
 // });
 //
 // // Update
-// export const updateFollower = new ValidatedMethod({
-//   name: "Follower.methods.updateFollower",
+// export const updateSubject = new ValidatedMethod({
+//   name: "Subject.methods.updateSubject",
 //   mixins: [CallPromiseMixin],
 //   // validate: null,
-//   validate: _.clone(FollowerSchema)
+//   validate: _.clone(SubjectSchema)
 //     .extend({
 //       _id: String
 //     })
@@ -114,54 +114,53 @@ import Follower from "./collections";
 //   run(doc) {
 //     if (Meteor.isServer) {
 //       Meteor._sleepForMs(100);
-//       return FOLLOWER.updateFollower({ _id: doc._id }, doc);
+//       return SUBJECT.updateSubject({ _id: doc._id }, doc);
 //     }
 //   }
 // });
 //
 // // Remove
-// export const removeFollower = new ValidatedMethod({
-//   name: "Follower.methods.removeFollower",
+// export const removeSubject = new ValidatedMethod({
+//   name: "Subject.methods.removeSubject",
 //   mixins: [CallPromiseMixin],
 //   validate: new SimpleSchema({
 //     _id: String
 //   }).validator(),
 //   run({ _id }) {
 //     if (Meteor.isServer) {
-//       return FOLLOWER.removeFollower(_id);
+//       return SUBJECT.removeSubject(_id);
 //     }
 //   }
 // });
 
-//model
-export class FOLLOWER {
-  static findFollower(selector, options) {
-    return Follower.find(selector, options).fetch();
+export class SUBJECT {
+  static findSubject(selector = {}, options = {}) {
+    return Subject.find(selector, options).fetch();
   }
 
-  static findOneFollower(selector, options) {
-    return Follower.findOne(selector, options);
+  static findOneSubject(selector = {}, options = {}) {
+    return Subject.findOne(selector, options);
   }
 
-  static insertFollower(doc, callback) {
-    return Follower.insert(doc, callback);
+  static insertSubject(doc = {}, callback) {
+    return Subject.insert(doc, callback);
   }
 
-  static updateFollower(selector, modifier, options, callback) {
-    return Follower.update(selector, {$set: modifier}, options, callback);
+  static updateSubject(selector = {}, modifier = {}, options = {}, callback) {
+    return Subject.update(selector, {$set: modifier}, options, callback);
   }
 
-  static removeFollower(selector, callback) {
-    return Follower.remove(selector, callback);
+  static removeSubject(selector = {}, callback) {
+    return Subject.remove(selector, callback);
   }
 }
 
 // rateLimit({
 //   methods: [
-//     findFollower,
-//     findOneFollower,
-//     insertFollower,
-//     updateFollower,
-//     removeFollower
+//     findSubject,
+//     findOneSubject,
+//     insertSubject,
+//     updateSubject,
+//     removeSubject
 //   ]
 // });
