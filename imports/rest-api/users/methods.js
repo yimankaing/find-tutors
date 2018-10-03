@@ -1,4 +1,4 @@
-import {Meteor} from "meteor/meteor";
+import { Meteor } from "meteor/meteor";
 // import SimpleSchema from "simpl-schema";
 // import { ValidatedMethod } from "meteor/mdg:validated-method";
 // import { CallPromiseMixin } from "meteor/didericis:callpromise-mixin";
@@ -163,16 +163,20 @@ export class USER {
     return Meteor.users.findOne(selector, options);
   }
 
-  static insertUser(doc = {}) {
+  static insertUser(doc = {}, callback) {
+    if (doc.profile.photo) {
+      doc.profile.photo = decodeURIComponent(doc.profile.photo);
+    }
     try {
-      return Accounts.createUser({
+      let id = Accounts.createUser({
         username: doc.username,
         email: doc.email,
         password: doc.password,
-        profile: doc.profile
+        profile: doc.profile,
       });
+      return callback(null, id);
     } catch (e) {
-      throwError(e);
+      return callback(e, null);
     }
   }
 
@@ -180,7 +184,7 @@ export class USER {
     try {
       // Update user
       Meteor.users.update(
-        {_id: selector},
+        { _id: selector },
         {
           $set: {
             username: modifier.username,

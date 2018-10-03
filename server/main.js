@@ -7,6 +7,7 @@ import "../imports/startup/server";
 //methods
 import {USER} from '../imports/rest-api/users/methods'
 
+
 import {STUDENT} from '../imports/rest-api/students/methods'
 import {TEACHER} from '../imports/rest-api/teachers/methods'
 import {SUBJECT} from '../imports/rest-api/subjects/methods'

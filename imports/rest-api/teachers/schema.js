@@ -68,9 +68,9 @@ export default new SimpleSchema({
     type: Number,
     optional: true
   },
-  termAndCondition: {
-    type: Boolean
-  },
+  // termAndCondition: {
+  //   type: Boolean
+  // },
   createdDate: {
     type: Date,
     optional: true

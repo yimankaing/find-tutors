@@ -1,12 +1,6 @@
 import {SUBJECT} from "./methods";
 import {sortArrayByKey} from "../../utils/sortArrayByKey";
-/*
-403: forbidden
-404: not found
-200: ok
-201: created
-304: not modified
-*/
+import {CODE} from "../code";
 
 JsonRoutes.add("get", "/find_subject/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
@@ -14,36 +8,35 @@ JsonRoutes.add("get", "/find_subject/:selector/:options", function (req, res, ne
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
   data.result = sortArrayByKey(SUBJECT.findSubject(selector, options), "khName");
-  data.code = "200";
+  data.code = CODE.OK;
   JsonRoutes.sendResult(res, {
     data: data
   });
 });
 
-JsonRoutes.add("get", "/findOne_subject/:selector/:options", function (req, res, next) {
-  res.charset = "utf-8";
-  const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
-  const options = req.params.options ? JSON.parse(req.params.options) : {};
-  let data = {};
-  data.result = SUBJECT.findOneSubject(selector, options);
-  data.code = "200";
-  JsonRoutes.sendResult(res, {
-    data: data
-  });
-});
+// JsonRoutes.add("get", "/findOne_subject/:selector/:options", function (req, res, next) {
+//   res.charset = "utf-8";
+//   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
+//   const options = req.params.options ? JSON.parse(req.params.options) : {};
+//   let data = {};
+//   data.result = SUBJECT.findOneSubject(selector, options);
+//   data.code = CODE.OK;
+//   JsonRoutes.sendResult(res, {
+//     data: data
+//   });
+// });
 
-JsonRoutes.add("get", "/insert_subject/:doc", function (req, res, next) {
+JsonRoutes.add("post", "/insert_subject", function (req, res, next) {
   res.charset = "utf-8";
-  const doc = req.params.doc ? JSON.parse(req.params.doc) : {};
-
+  const doc = req.body;
   SUBJECT.insertSubject(doc, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = "201";
+      data.code = CODE.CREATED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {
@@ -52,19 +45,19 @@ JsonRoutes.add("get", "/insert_subject/:doc", function (req, res, next) {
   });
 });
 
-JsonRoutes.add("get", "/update_subject/:selector/:modifier/:options", function (req, res, next) {
+JsonRoutes.add("post", "/update_subject/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
   const selector = req.params.selector ? JSON.parse(req.params.selector) : {};
-  const modifier = req.params.modifier ? JSON.parse(req.params.modifier) : {};
+  const modifier = req.body;
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   SUBJECT.updateSubject(selector, modifier, options, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = result ? "201" : "304";
+      data.code = result ? CODE.CREATED : CODE.NOT_MODIFIED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {
@@ -80,11 +73,11 @@ JsonRoutes.add("get", "/remove_subject/:selector", function (req, res, next) {
   SUBJECT.removeSubject(selector, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = result ? "201" : "304";
+      data.code = result ? CODE.CREATED : CODE.NOT_MODIFIED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {

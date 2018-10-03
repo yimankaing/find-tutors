@@ -1,12 +1,6 @@
 import {TEACHER} from "./methods";
 
-/*
-403: forbidden
-404: not found
-200: ok
-201: created
-304: not modified
-*/
+import {CODE} from "../code";
 
 JsonRoutes.add("get", "/find_teacher/:selector/:options", function (req, res, next) {
   res.charset = "utf-8";
@@ -14,7 +8,7 @@ JsonRoutes.add("get", "/find_teacher/:selector/:options", function (req, res, ne
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
   data.result = TEACHER.findTeacher(selector, options);
-  data.code = "200";
+  data.code = CODE.OK;
   JsonRoutes.sendResult(res, {
     data: data
   });
@@ -26,7 +20,7 @@ JsonRoutes.add("get", "/findOne_teacher/:selector/:options", function (req, res,
   const options = req.params.options ? JSON.parse(req.params.options) : {};
   let data = {};
   data.result = TEACHER.findOneTeacher(selector, options);
-  data.code = "200";
+  data.code = CODE.OK;
   JsonRoutes.sendResult(res, {
     data: data
   });
@@ -39,11 +33,11 @@ JsonRoutes.add("get", "/insert_teacher/:doc", function (req, res, next) {
   TEACHER.insertTeacher(doc, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = "201";
+      data.code = CODE.CREATED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {
@@ -60,11 +54,11 @@ JsonRoutes.add("get", "/update_teacher/:selector/:modifier/:options", function (
   TEACHER.updateTeacher(selector, modifier, options, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = result ? "201" : "304";
+      data.code = result ? CODE.CREATED : CODE.NOT_MODIFIED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {
@@ -80,11 +74,11 @@ JsonRoutes.add("get", "/remove_teacher/:selector", function (req, res, next) {
   TEACHER.removeTeacher(selector, (error, result) => {
     let data = {};
     if (error) {
-      data.code = "403";
+      data.code = CODE.FORBIDDEN;
       data.msg = error.message;
       data.result = "";
     } else {
-      data.code = result ? "201" : "304";
+      data.code = result ? CODE.CREATED : CODE.NOT_MODIFIED;
       data.result = result;
     }
     JsonRoutes.sendResult(res, {

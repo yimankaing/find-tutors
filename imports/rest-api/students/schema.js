@@ -31,19 +31,19 @@ export default new SimpleSchema({
     type: String,
     optional: true
   },
-  locations: {
+  location: {
     type: Object,
     optional: true
   },
-  "locations.longitude": { type: String },
-  "locations.latitude": { type: String },
+  "location.longitude": { type: String },
+  "location.latitude": { type: String },
   phoneNumber: {
     type: String,
     optional: true
   },
-  termAndCondition: {
-    type: Boolean
-  },
+  // termAndCondition: {
+  //   type: Boolean
+  // },
   createdDate: {
     type: Date,
     optional: true
